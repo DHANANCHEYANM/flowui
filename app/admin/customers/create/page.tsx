@@ -29,7 +29,7 @@ export default function CreateCustomerPage() {
   };
 
   return (
-    <div className="pl-50">
+    <div className="pl-35">
       <h1 className="text-4xl font-bold">
         New Customer
       </h1>

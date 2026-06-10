@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 
 import {
   ColumnDef,
@@ -22,15 +23,18 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   emptyMessage?: string;
-  onRowClick?: (row: TData) => void;
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<
+  TData extends { id: string },
+  TValue
+>({
   columns,
   data,
   emptyMessage = "No data found.",
-  onRowClick,
 }: DataTableProps<TData, TValue>) {
+  const router = useRouter();
+
   const table = useReactTable({
     data,
     columns,
@@ -38,6 +42,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
+     <div className="space-y-4 pl-50">
     <div className="overflow-hidden rounded-xl border bg-white">
       <Table>
         <TableHeader>
@@ -46,7 +51,7 @@ export function DataTable<TData, TValue>({
               {headerGroup.headers.map((header) => (
                 <TableHead
                   key={header.id}
-                  className="h-12 font-semibold text-foreground"
+                  className="h-12 font-semibold"
                 >
                   {header.isPlaceholder
                     ? null
@@ -65,14 +70,15 @@ export function DataTable<TData, TValue>({
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                className="cursor-pointer hover:bg-muted/30"
-                onClick={() => onRowClick?.(row.original)}
+                className="cursor-pointer hover:bg-muted/50"
+                onClick={() =>
+                  router.push(
+                    `/admin/warehouse/products/${row.original.id}/edit`
+                  )
+                }
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell
-                    key={cell.id}
-                    className="py-4"
-                  >
+                  <TableCell key={cell.id}>
                     {flexRender(
                       cell.column.columnDef.cell,
                       cell.getContext()
@@ -93,6 +99,7 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+    </div>
     </div>
   );
 }

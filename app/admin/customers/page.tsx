@@ -29,10 +29,10 @@ const data = [
 
 export default function CustomersPage() {
     return (
-        <div className="p-6 pl-50">
+        <div className=" pl-50">
 
-            <div className="mb-6 flex items-center justify-between">
-                <h1 className="text-3xl font-bold">
+            <div className="flex items-center justify-between border-b px-6 py-4">
+                <h1 className="text-4xl font-bold">
                     Customers
                 </h1>
 
@@ -68,4 +68,4 @@ export default function CustomersPage() {
             />
         </div>
     );
-}
+}  

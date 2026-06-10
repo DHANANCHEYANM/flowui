@@ -43,9 +43,9 @@ export default function BrandsPage() {
   const [open, setOpen] = useState(false);
   const [categoriesName, setCategoriesName] = useState("");
   return (
-    <div className="p-6 pl-50">
+    <div className="p-6 pl-45">
 
-      <div className="mb-7 flex items-center justify-between">
+      <div className="flex items-center justify-between border-b px-6 py-4">
         <h1 className="text-4xl font-bold">
           Categories
         </h1>
